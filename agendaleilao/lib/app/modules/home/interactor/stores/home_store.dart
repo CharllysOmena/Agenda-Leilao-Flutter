@@ -1,3 +1,6 @@
+import 'package:agendaleilao/app/modules/login/data/services/auth_login_service.dart';
+import 'package:agendaleilao/app/modules/login/data/services/token_auth_cache.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 part 'home_store.g.dart';
@@ -5,10 +8,16 @@ part 'home_store.g.dart';
 class HomeStore = HomeStoreBase with _$HomeStore;
 
 abstract class HomeStoreBase with Store {
-  @observable
-  int counter = 0;
+  final IAuthLoginService authLoginService;
+  TokenAuthCache tokenAuthCache = TokenAuthCache.instance;
 
-  Future<void> increment() async {
-    counter = counter + 1;
+  HomeStoreBase({required this.authLoginService});
+
+  @action
+  Future logOut() async {
+    String? token = await tokenAuthCache.getToken();
+    await authLoginService.logOut(token);
+    await tokenAuthCache.deleteToken();
+    Modular.to.navigate("/login");
   }
 }

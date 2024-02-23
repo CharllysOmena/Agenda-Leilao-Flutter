@@ -17,6 +17,8 @@ abstract class _CadastroStoreBase with Store {
   TextEditingController celularController = TextEditingController();
   TextEditingController senhaConfirmaController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
+  @observable
+  bool checkBox = false;
 
   Usuario? usuario;
 
@@ -24,5 +26,5 @@ abstract class _CadastroStoreBase with Store {
   Future register() async {}
 
   Usuario montarDados(String email, String senha) =>
-      usuario = Usuario(email: email, senha: senha);
+      usuario = Usuario(email: email, senha: senha, nome: "", contato: "");
 }

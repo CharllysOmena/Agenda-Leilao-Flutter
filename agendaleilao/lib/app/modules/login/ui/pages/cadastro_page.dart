@@ -21,16 +21,17 @@ class CadastroPageState extends State<CadastroPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Criar conta'),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [Colors.grey, Colors.black],
+              stops: [0.0, 0.9],
             ),
           ),
         ),
+        title: Text('Home'),
       ),
       body: Observer(
         builder: (context) {
@@ -50,7 +51,7 @@ class CadastroPageState extends State<CadastroPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SizedBox(height: 30),
+                            SizedBox(height: 20),
                             Form(
                               key: store.formkey,
                               child: Column(
@@ -81,7 +82,7 @@ class CadastroPageState extends State<CadastroPage> {
                                       fillColor: Colors.grey[300],
                                     ),
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(height: 25),
                                   Align(
                                     alignment: Alignment.topLeft,
                                     child: Text(
@@ -108,7 +109,7 @@ class CadastroPageState extends State<CadastroPage> {
                                       fillColor: Colors.grey[300],
                                     ),
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(height: 25),
                                   Align(
                                     alignment: Alignment.topLeft,
                                     child: Text(
@@ -136,7 +137,7 @@ class CadastroPageState extends State<CadastroPage> {
                                       fillColor: Colors.grey[300],
                                     ),
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(height: 25),
                                   Align(
                                     alignment: Alignment.topLeft,
                                     child: Text(
@@ -162,10 +163,10 @@ class CadastroPageState extends State<CadastroPage> {
                                     decoration: InputDecoration(
                                       hintText: "*********",
                                       filled: true,
-                                      fillColor: Colors.white,
+                                      fillColor: Colors.grey[300],
                                     ),
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(height: 25),
                                   Align(
                                     alignment: Alignment.topLeft,
                                     child: Text(
@@ -191,20 +192,53 @@ class CadastroPageState extends State<CadastroPage> {
                                     decoration: InputDecoration(
                                       hintText: "*********",
                                       filled: true,
-                                      fillColor: Colors.white,
+                                      fillColor: Colors.grey[300],
                                     ),
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(height: 25),
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        value: store.checkBox,
+                                        onChanged: (bool? value) {
+                                          setState(() {
+                                            store.checkBox = value!;
+                                          });
+                                        },
+                                        checkColor: Colors.white,
+                                        fillColor: MaterialStateProperty
+                                            .resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                            if (states.contains(
+                                                MaterialState.selected)) {
+                                              return Color(0xFFAE841A);
+                                            }
+                                            return Color(0xFFAE841A);
+                                          },
+                                        ),
+                                      ),
+                                      Flexible(
+                                        child: Text(
+                                          "Ao criar sua conta você concorda com os Termos de Uso e Política de Privacidade",
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 50),
                                   ElevatedButton(
                                     onPressed: () {},
                                     style: ElevatedButton.styleFrom(
                                       minimumSize: Size.fromHeight(60),
-                                      backgroundColor: Color(0xFFAE841A),
+                                      backgroundColor: Colors.green[700],
                                       textStyle: const TextStyle(
                                         fontSize: 23,
                                       ),
                                     ),
-                                    child: const Text('Entrar'),
+                                    child: const Text('Criar conta'),
                                   ),
                                   SizedBox(height: 25),
                                 ],

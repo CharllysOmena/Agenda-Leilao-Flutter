@@ -5,7 +5,7 @@ import '../models/usuario.dart';
 
 abstract interface class IAuthLoginService {
   Future<AuthLoginState> signIn(Usuario usuario);
-  Future signOut();
+  Future logOut(String? token);
 }
 
 class AuthLoginService implements IAuthLoginService {
@@ -15,43 +15,39 @@ class AuthLoginService implements IAuthLoginService {
 
   @override
   Future<AuthLoginState> signIn(Usuario usuario) async {
-    String url = "https://bis365.com.br/bid365/api/v1/auth/login-client";
-    Map<String, dynamic> userData = usuario.toJson();
+    var headers = {
+      'App': '583f0a5b-c017-4956-b788-a6305767c117',
+      'Content-Type': 'application/json'
+    };
     try {
-      var response = await dio.post(url, data: userData);
+      var response = await dio.post(
+        "https://bis365.com.br/bid365/api/v1/auth/login",
+        data: usuario.toJsonLogin(),
+        options: Options(headers: headers),
+      );
       if (response.statusCode == 200) {
-        print(response.data);
-        return const SuccessAuthLoginState();
+        String token = response.data["data"]["token"];
+        return SuccessAuthLoginState(token: token);
       } else {
         return const EmptyAuthLoginState();
       }
     } catch (e) {
-      print("$e");
       return const ErrorExceptionAuthLoginState();
     }
   }
 
   @override
-  Future signOut() async {
-    String token = "583f0a5b-c017-4956-b788-a6305767c117";
-    dio.options.headers['Authorization'] = 'Bearer $token';
+  Future logOut(String? token) async {
+    var headers = {
+      'App': '583f0a5b-c017-4956-b788-a6305767c117',
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json'
+    };
     String url = "https://bis365.com.br/bid365/api/v1/auth/logout";
     try {
-      var response = await dio.delete(url);
-      if (response.statusCode == 200) {
-        print(response.data);
-      } else {
-        print("não foi possivel");
-      }
+      var response = await dio.delete(url, options: Options(headers: headers));
     } catch (e) {
       print(e);
     }
   }
-}
-
-void main() {
-  Dio dio = Dio();
-  Usuario usuario = Usuario(email: "fabioln@ldix.com", senha: "1234567o");
-  AuthLoginService authLoginService = AuthLoginService(dio: dio);
-  authLoginService.signOut();
 }

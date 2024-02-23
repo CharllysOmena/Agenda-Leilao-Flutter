@@ -1,16 +1,20 @@
 class Usuario {
+  String nome;
   String email;
   String senha;
+  String contato;
 
   Usuario({
+    required this.nome,
     required this.email,
     required this.senha,
+    required this.contato,
   });
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJsonLogin() {
     return {
-      'email': email,
-      'senha': senha,
+      'username': email,
+      'password': senha,
     };
   }
 }

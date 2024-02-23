@@ -25,6 +25,22 @@ mixin _$CadastroStore on _CadastroStoreBase, Store {
     });
   }
 
+  late final _$checkBoxAtom =
+      Atom(name: '_CadastroStoreBase.checkBox', context: context);
+
+  @override
+  bool get checkBox {
+    _$checkBoxAtom.reportRead();
+    return super.checkBox;
+  }
+
+  @override
+  set checkBox(bool value) {
+    _$checkBoxAtom.reportWrite(value, super.checkBox, () {
+      super.checkBox = value;
+    });
+  }
+
   late final _$registerAsyncAction =
       AsyncAction('_CadastroStoreBase.register', context: context);
 
@@ -36,7 +52,8 @@ mixin _$CadastroStore on _CadastroStoreBase, Store {
   @override
   String toString() {
     return '''
-state: ${state}
+state: ${state},
+checkBox: ${checkBox}
     ''';
   }
 }

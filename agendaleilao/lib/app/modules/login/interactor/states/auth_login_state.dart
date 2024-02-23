@@ -5,7 +5,8 @@ class StartAuthLoginState implements AuthLoginState {
 }
 
 class SuccessAuthLoginState implements AuthLoginState {
-  const SuccessAuthLoginState();
+  final String token;
+  const SuccessAuthLoginState({required this.token});
 }
 
 class ErrorExceptionAuthLoginState implements AuthLoginState {
