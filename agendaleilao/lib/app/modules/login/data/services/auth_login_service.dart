@@ -1,3 +1,4 @@
+import 'package:agendaleilao/app/modules/login/data/services/token_auth_cache.dart';
 import 'package:agendaleilao/app/modules/login/interactor/states/auth_login_state.dart';
 import 'package:dio/dio.dart';
 
@@ -5,11 +6,12 @@ import '../models/usuario.dart';
 
 abstract interface class IAuthLoginService {
   Future<AuthLoginState> signIn(Usuario usuario);
-  Future logOut(String? token);
+  Future logOut();
 }
 
 class AuthLoginService implements IAuthLoginService {
   final Dio dio;
+  TokenAuthCache tokenAuthCache = TokenAuthCache.instance;
 
   AuthLoginService({required this.dio});
 
@@ -37,7 +39,8 @@ class AuthLoginService implements IAuthLoginService {
   }
 
   @override
-  Future logOut(String? token) async {
+  Future logOut() async {
+    String? token = await tokenAuthCache.getToken();
     var headers = {
       'App': '583f0a5b-c017-4956-b788-a6305767c117',
       'Authorization': 'Bearer $token',
@@ -46,6 +49,9 @@ class AuthLoginService implements IAuthLoginService {
     String url = "https://bis365.com.br/bid365/api/v1/auth/logout";
     try {
       var response = await dio.delete(url, options: Options(headers: headers));
+      if (response.statusCode == 200) {
+        await tokenAuthCache.deleteToken();
+      }
     } catch (e) {
       print(e);
     }
