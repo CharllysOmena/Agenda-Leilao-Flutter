@@ -134,7 +134,7 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () {
                           if (widget.store.formKey.currentState!.validate()) {
@@ -144,20 +144,20 @@ class _LoginState extends State<Login> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          minimumSize: Size.fromHeight(60),
-                          backgroundColor: Color(0xFFAE841A),
+                          minimumSize: const Size.fromHeight(60),
+                          backgroundColor: const Color(0xFFAE841A),
                           textStyle: const TextStyle(
                             fontSize: 23,
                           ),
                         ),
                         child: const Text('Entrar'),
                       ),
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
                       OutlinedButton(
                         onPressed: () =>
                             Modular.to.pushNamed("/login/cadastro"),
                         style: OutlinedButton.styleFrom(
-                          minimumSize: Size.fromHeight(60),
+                          minimumSize: const Size.fromHeight(60),
                           side: BorderSide(
                             color: Colors.white,
                             width: 3,

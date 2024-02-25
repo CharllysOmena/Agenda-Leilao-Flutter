@@ -1,6 +1,8 @@
+import 'package:agendaleilao/app/modules/home/interactor/stores/detalhes_leilao_store.dart';
 import 'package:agendaleilao/app/modules/home/data/datasources/leiloes_datasource.dart';
 import 'package:agendaleilao/app/modules/home/data/repositories/leiloes_aovivo_repository.dart';
 import 'package:agendaleilao/app/modules/home/interactor/stores/leiloes_store.dart';
+import 'package:agendaleilao/app/modules/home/ui/pages/detalhes_leilao_page.dart';
 import 'package:agendaleilao/app/modules/login/data/services/auth_login_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -11,6 +13,7 @@ import 'ui/pages/home_page.dart';
 class HomeModule extends Module {
   @override
   final List<Bind> binds = [
+    Bind.lazySingleton((i) => DetalhesLeilaoStore()),
     Bind.lazySingleton((i) => Dio()),
     Bind.lazySingleton((i) => LeiloesDatasources(dio: i.get())),
     Bind.lazySingleton((i) => LeiloesRepository(leiloesDatasource: i.get())),
@@ -22,5 +25,6 @@ class HomeModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute, child: (_, args) => HomePage()),
+    ChildRoute("detalhes_leilao", child: (_, args) => DetalhesLeilaoPage())
   ];
 }

@@ -22,7 +22,7 @@ class CustomCard extends StatelessWidget {
                   child: Image.network(
                     'https://nafortuna.com.br/wp-content/uploads/2022/01/arroba-768x576.jpg',
                     fit: BoxFit.cover,
-                    height: 150,
+                    height: MediaQuery.of(context).size.height / 5,
                     width: 150,
                   ),
                 ),
@@ -36,7 +36,7 @@ class CustomCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    leilao.name!,
+                    leilao.name!.toUpperCase(),
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -89,22 +89,39 @@ class CustomCard extends StatelessWidget {
                       minimumSize: Size.fromHeight(50),
                       backgroundColor: Colors.red[900],
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.play_arrow,
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          'Assistir',
-                          style: TextStyle(
-                            fontSize: 20,
+                    child: (leilao.type == 1)
+                        ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.play_arrow,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                'Assistir',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          )
+                        : Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.favorite,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                'Favoritar',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
                   )
                 ],
               ),

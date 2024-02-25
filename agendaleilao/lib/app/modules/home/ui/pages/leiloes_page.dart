@@ -5,7 +5,6 @@ import 'package:agendaleilao/app/modules/login/ui/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mobx/mobx.dart';
 
 class LeiloesPage extends StatefulWidget {
   final int type;
@@ -22,13 +21,13 @@ class LeiloesPageState extends State<LeiloesPage> {
 
   @override
   void initState() {
+    super.initState();
     store.getLeiloes();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
       body: Observer(
         builder: (context) {
           if (store.state is SuccessLeiloesState) {
@@ -37,24 +36,34 @@ class LeiloesPageState extends State<LeiloesPage> {
               child: ListView.builder(
                 itemCount: store.leiloes.length,
                 itemBuilder: (context, index) {
-                  if (store.leiloes[index].type == 3) {
-                    return CustomCard(
-                      leilao: store.leiloes[index],
+                  if (store.leiloes[index].type == widget.type) {
+                    return GestureDetector(
+                      onTap: () => Modular.to.pushNamed("/detalhes_leilao",
+                          arguments: store.leiloes[index]),
+                      child: CustomCard(
+                        leilao: store.leiloes[index],
+                      ),
                     );
                   }
                 },
               ),
             );
           } else if (store.state is LoadingLeiloesState) {
-            return Stack(
+            return const Stack(
               children: [Loading()],
             );
           } else {
-            return Container(
-              child: Column(children: [
-                Icon(Icons.error),
-                Text("Erro desconhecido"),
-              ]),
+            return const Center(
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.error,
+                    size: 30,
+                    color: Colors.red,
+                  ),
+                  Text("Erro desconhecido"),
+                ],
+              ),
             );
           }
         },

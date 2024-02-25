@@ -8,7 +8,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Agenda de leilões',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(scaffoldBackgroundColor: Colors.grey[900]),
       debugShowCheckedModeBanner: false,
     ).modular();
   }

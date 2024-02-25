@@ -1,3 +1,4 @@
+import 'package:agendaleilao/app/modules/login/ui/widgets/masks.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import '../../interactor/stores/cadastro_store.dart';
@@ -72,12 +73,12 @@ class _CadastroState extends State<Cadastro> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (email) =>
                             email != null && !EmailValidator.validate(email)
-                                ? 'Digite um nome válido'
+                                ? 'Digite um email válido'
                                 : null,
                         controller: widget.store.emailController,
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
-                          hintText: "Informe seu nome completo",
+                          hintText: "email@example.com",
                           filled: true,
                           fillColor: Colors.grey[300],
                         ),
@@ -95,15 +96,15 @@ class _CadastroState extends State<Cadastro> {
                       ),
                       SizedBox(height: 5),
                       TextFormField(
-                        inputFormatters: [],
+                        inputFormatters: [Mask().maskCell],
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (nome) => nome != null && nome.length > 10
+                        validator: (numero) => numero!.length < 15
                             ? 'Digite um número válido'
                             : null,
                         controller: widget.store.celularController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          hintText: "email@example.com",
+                          hintText: "(82) 99999-9999",
                           filled: true,
                           fillColor: Colors.grey[300],
                         ),
@@ -196,7 +197,14 @@ class _CadastroState extends State<Cadastro> {
                       ),
                       SizedBox(height: 50),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (widget.store.formkey.currentState!.validate()) {
+                            if (widget.store.checkBox == true) {
+                            } else {
+                              widget.store.mensagem();
+                            }
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           minimumSize: Size.fromHeight(60),
                           backgroundColor: Colors.green[700],
