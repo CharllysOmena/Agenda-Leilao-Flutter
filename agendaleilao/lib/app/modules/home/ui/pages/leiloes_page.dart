@@ -38,7 +38,7 @@ class LeiloesPageState extends State<LeiloesPage> {
                 itemBuilder: (context, index) {
                   if (store.leiloes[index].type == widget.type) {
                     return GestureDetector(
-                      onTap: () => Modular.to.pushNamed("/detalhes_leilao",
+                      onTap: () => Modular.to.pushNamed("/home/detalhes_leilao",
                           arguments: store.leiloes[index]),
                       child: CustomCard(
                         leilao: store.leiloes[index],

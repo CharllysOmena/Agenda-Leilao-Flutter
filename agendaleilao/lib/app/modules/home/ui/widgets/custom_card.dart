@@ -49,19 +49,6 @@ class CustomCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
-                        Icons.location_on,
-                        size: 18,
-                      ),
-                      Text(
-                        leilao.city!,
-                        style: TextStyle(fontSize: 15),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
                         Icons.lock_clock,
                         size: 18,
                       ),
@@ -72,7 +59,7 @@ class CustomCard extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                   Text(
                     "Clique e assista esse leilão agora!",

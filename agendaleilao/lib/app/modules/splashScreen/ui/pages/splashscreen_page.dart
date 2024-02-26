@@ -34,20 +34,20 @@ class SplashscreenPageState extends State<SplashscreenPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 250,
+                height: 200,
               ),
               Image.asset(
                 "assets/logo_completa.png",
                 scale: 4,
               ),
-              SizedBox(height: 150),
+              SizedBox(height: 100),
               Text(
                 "Leilões online para rematar seu gado com praticidade.",
                 style: TextStyle(fontSize: 20, color: Colors.white),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                height: 40,
+                height: 30,
               ),
               CircularProgressIndicator(
                 color: Colors.white,
