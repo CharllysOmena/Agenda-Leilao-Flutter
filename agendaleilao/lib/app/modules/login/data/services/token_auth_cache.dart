@@ -29,6 +29,7 @@ class TokenAuthCache implements ITokenAuthCache {
   @override
   Future deleteToken() async {
     await _initSharedPreferences();
+    print(await hasToken());
     if (await hasToken() == true) {
       await _prefs.remove('auth_token');
     }

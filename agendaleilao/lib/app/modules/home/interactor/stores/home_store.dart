@@ -19,7 +19,7 @@ abstract class HomeStoreBase with Store {
   @action
   Future logOut() async {
     await authLoginService.logOut();
-    Modular.to.navigate("/login");
+    Modular.to.navigate("/home");
   }
 
   @action

@@ -49,9 +49,7 @@ class AuthLoginService implements IAuthLoginService {
     String url = "https://bis365.com.br/bid365/api/v1/auth/logout";
     try {
       var response = await dio.delete(url, options: Options(headers: headers));
-      if (response.statusCode == 200) {
-        await tokenAuthCache.deleteToken();
-      }
+      await tokenAuthCache.deleteToken();
     } catch (e) {
       print(e);
     }

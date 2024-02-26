@@ -33,7 +33,7 @@ abstract class _LoginStoreBase with Store {
     if (response is SuccessAuthLoginState) {
       state = response;
       await tokenAuthCache.saveToken(response.token);
-      Modular.to.navigate("/");
+      Modular.to.navigate("/home");
     } else {
       state = response;
       if (await tokenAuthCache.hasToken() == true) {
