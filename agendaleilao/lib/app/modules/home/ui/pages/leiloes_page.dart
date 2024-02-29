@@ -36,15 +36,13 @@ class LeiloesPageState extends State<LeiloesPage> {
               child: ListView.builder(
                 itemCount: store.leiloes.length,
                 itemBuilder: (context, index) {
-                  if (store.leiloes[index].type == widget.type) {
-                    return GestureDetector(
-                      onTap: () => Modular.to.pushNamed("/home/detalhes_leilao",
-                          arguments: store.leiloes[index]),
-                      child: CustomCard(
-                        leilao: store.leiloes[index],
-                      ),
-                    );
-                  }
+                  return GestureDetector(
+                    onTap: () => Modular.to.pushNamed("/home/detalhes_leilao",
+                        arguments: store.leiloes[index]),
+                    child: CustomCard(
+                      leilao: store.leiloes[index],
+                    ),
+                  );
                 },
               ),
             );

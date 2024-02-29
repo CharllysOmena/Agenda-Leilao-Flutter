@@ -8,7 +8,7 @@ import '../widgets/card_location.dart';
 
 class DetalhesLeilaoPage extends StatefulWidget {
   final String title;
-  const DetalhesLeilaoPage({Key? key, this.title = 'Detelhes do leilão'})
+  const DetalhesLeilaoPage({Key? key, this.title = 'Detalhes do leilão'})
       : super(key: key);
   @override
   DetalhesLeilaoPageState createState() => DetalhesLeilaoPageState();
